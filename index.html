@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="index.css" />
+
+    <script src="index.js" defer></script>
+
+    <title>Star Wars Cafe</title>
+  </head>
+  <body>
+    <header>
+      <h1>Star Wars Cafe</h1>
+
+      <nav>
+        <button class="characters-link">Characters</button>
+        <button class="create-character-link">Create</button>
+      </nav>
+    </header>
+
+    <main>
+      <form class="create-character hidden">
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+        />
+        <input
+          type="text"
+          name="image"
+          placeholder="image url"
+        />
+        <input
+          type="text"
+          name="favorite-food"
+          placeholder="favorite food"
+        />
+        <label for="affiliation">affiliation</label>
+        <input
+          type="checkbox"
+          name="affiliation"
+          id="affiliation"
+        />
+        <input type="submit" value="Emerge!" />
+      </form>
+      <section class="characters"></section>
+    </main>
+  </body>
+</html>
