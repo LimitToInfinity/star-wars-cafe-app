@@ -31,19 +31,27 @@ function makeNewCharacter(event) {
   const name = characterFormData.get('name');
   const image = characterFormData.get('image');
   const favoriteFood = characterFormData.get('favorite-food');
-  const affiliation = characterFormData.get('affiliation');
+  const affiliationEl = event.target.querySelector('input[type="checkbox"]');
+  const affiliation = affiliationEl.checked;
 
-  console.log(name, image, favoriteFood, affiliation);
+  const character = { name, image, affiliation, favorite_food: favoriteFood };
 
-  // fetch(charactersURL, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({ name, image, favorite_food: favoriteFood })
-  // })
-  //   .then(parseJSON)
-  //   .then(console.log);
+  fetch(charactersURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(character)
+  })
+    .then(response => {
+      if (response.status === 201) {
+        return parseJSON(response);
+      } else {
+        throw new Error("Uncreatable entity");
+      }
+    })
+    .then(showCharacter)
+    .catch(error => console.error(error.message));
 
   event.target.reset();
 }
