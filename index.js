@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:7000';
+const baseURL = 'https://star-wars-cafe-api.herokuapp.com';
 const charactersURL = `${baseURL}/characters`;
 
 const charactersLink = document.querySelector('.characters-link');
