@@ -5,6 +5,8 @@ const charactersLink = document.querySelector('.characters-link');
 const createCharacterLink = document.querySelector('.create-character-link');
 const createCharacter = document.querySelector('.create-character');
 const charactersSection = document.querySelector('.characters');
+const affiliationFilter = document.querySelector(".affiliation-filter");
+const charactersContainer = document.querySelector('.characters-container');
 
 fetch(charactersURL)
   .then(parseJSON)
@@ -13,6 +15,7 @@ fetch(charactersURL)
 charactersLink.addEventListener('click', displayCharactersSection);
 createCharacterLink.addEventListener('click', displayCreateCharacterForm);
 createCharacter.addEventListener('submit', makeNewCharacter);
+affiliationFilter.addEventListener('change', filterByAffiliation);
 
 function displayCharactersSection() {
   charactersSection.classList.remove('hidden');
@@ -56,8 +59,22 @@ function makeNewCharacter(event) {
   event.target.reset();
 }
 
+function filterByAffiliation(event) {
+  const characterCards = Array.from(document.querySelectorAll('.character-card'));
+
+  characterCards.forEach(card => {
+    card.classList.remove('hidden');
+
+    const affiliation = card.querySelector('.affiliation');
+    if (event.target.value === "") {
+      return;
+    } else if (affiliation.dataset.affiliation !== event.target.value) {
+      card.classList.add('hidden');
+    }
+  });
+}
+
 function displayCharacters(characters) {
-  console.log('characters', characters);
   characters.forEach(character => {
     showCharacter(character);
   });
@@ -66,6 +83,7 @@ function displayCharacters(characters) {
 function showCharacter(character) {
   const characterCard = document.createElement('div');
   characterCard.classList.add('character-card');
+  characterCard.dataset.characterId = character.id;
 
   const name = document.createElement('h2');
   name.textContent = character.name;
@@ -77,13 +95,15 @@ function showCharacter(character) {
   favoriteFood.textContent = character.favorite_food;
 
   const affiliation = document.createElement('p');
+  affiliation.classList.add('affiliation');
   affiliation.textContent = character.affiliation
     ? 'light side'
     : 'dark side';
+  affiliation.dataset.affiliation = character.affiliation;
 
   characterCard.append(name, image, favoriteFood, affiliation);
 
-  charactersSection.append(characterCard);
+  charactersContainer.append(characterCard);
 }
 
 function parseJSON(response) {

@@ -91,7 +91,12 @@ input[type="submit"]:hover {
   background-color: #6cb346;
 }
 
-.characters {
+.affiliation-filter {
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.characters-container {
   display: flex;
   flex-wrap: wrap;
 }

@@ -45,7 +45,16 @@
         />
         <input type="submit" value="Emerge!" />
       </form>
-      <section class="characters"></section>
+
+      <section class="characters">
+        <select class="affiliation-filter">
+          <option value="">All characters</option>
+          <option value="true">Light side</option>
+          <option value="false">Dark side</option>
+        </select>
+
+        <div class="characters-container"></div>
+      </section>
     </main>
   </body>
 </html>
